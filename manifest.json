@@ -1,0 +1,7 @@
+{
+  "name": "payments",
+  "short_name": "payments",
+  "description": "Payments viewer demo",
+  "start_url": "/",
+  "display": "standalone"
+}

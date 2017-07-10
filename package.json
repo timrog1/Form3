@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "opn http://localhost:9999 && node web"
+  },
+  "devDependencies": {
+    "express": "^4.15.3",
+    "opn-cli": "^3.1.0"
+  }
+}
