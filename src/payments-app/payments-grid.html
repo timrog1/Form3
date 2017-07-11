@@ -1,8 +1,16 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="payments-grid">
   <template>
-
+    <iron-ajax auto url="{{dataSource}}" last-response="{{paymentData}}"></iron-ajax>
+    <ul>
+        <template is="dom-repeat" items="{{paymentData.data}}">
+            <li>
+                {{item.attributes.reference}}
+            </li>
+        </template>
+    </ul>
   </template>
   <script>
     /**
