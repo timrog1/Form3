@@ -8,11 +8,13 @@
             <tr>
                 <th>Reference</th>
                 <th>Amount</th>
+                <th></th>
             </tr>
             <template is="dom-repeat" items="{{paymentData.data}}">
                 <tr>
                     <td>{{item.attributes.reference}}</td>
                     <td>{{item.attributes.currency}} {{item.attributes.amount}}</td>
+                    <td><a href="javascript:void(0)" on-click="viewClick">View</a></td>
                 </tr>
             </template>
         </table>
@@ -29,6 +31,9 @@
                 dataSource: String,
                 paymentData: Object
             };
+        }
+        viewClick(e) {
+            this.dispatchEvent(new CustomEvent('select', e.model.item));
         }
     }
 
