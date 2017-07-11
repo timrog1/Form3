@@ -2,31 +2,36 @@
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="payments-grid">
-  <template>
-    <iron-ajax auto url="{{dataSource}}" last-response="{{paymentData}}"></iron-ajax>
-    <ul>
-        <template is="dom-repeat" items="{{paymentData.data}}">
-            <li>
-                {{item.attributes.reference}}
-            </li>
-        </template>
-    </ul>
-  </template>
-  <script>
+    <template>
+        <iron-ajax auto url="{{dataSource}}" last-response="{{paymentData}}"></iron-ajax>
+        <table>
+            <tr>
+                <th>Reference</th>
+                <th>Amount</th>
+            </tr>
+            <template is="dom-repeat" items="{{paymentData.data}}">
+                <tr>
+                    <td>{{item.attributes.reference}}</td>
+                    <td>{{item.attributes.currency}} {{item.attributes.amount}}</td>
+                </tr>
+            </template>
+        </table>
+    </template>
+    <script>
     /**
      * @customElement
      * @polymer
      */
     class PaymentsGrid extends Polymer.Element {
-      static get is() { return 'payments-grid'; }
-      static get properties() {
-        return {
-          dataSource: String,
-          paymentData: Object
-        };
-      }
+        static get is() { return 'payments-grid'; }
+        static get properties() {
+            return {
+                dataSource: String,
+                paymentData: Object
+            };
+        }
     }
 
     window.customElements.define(PaymentsGrid.is, PaymentsGrid);
-  </script>
+</script>
 </dom-module>
