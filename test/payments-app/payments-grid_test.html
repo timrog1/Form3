@@ -65,6 +65,21 @@
                 });
             });
 
+            suite('when I click "View" against a payment', () => {
+                test('then it fires Select event', done => {
+                var element = fixture('BasicTestFixture');
+                var fired = false;
+                element.addEventListener('select', e => { fired = true; });
+                flush(() => {
+                    var link = Polymer.dom(element.root).querySelector('a');
+                    link.click();
+                    assert.isTrue(fired);
+                    done();
+                });
+                
+            });
+            });
+
             teardown(function () {
                 server.restore();
             });
