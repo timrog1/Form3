@@ -30,22 +30,18 @@
         assert.isNotNull(grid);
       });
 
-      test('Shows a list of payment references', function () {
-        var data = {
-          data: [
-            {
-              attributes: {
-                reference: "a payment reference",
-                amount: "100.21"
-              }
-            }
-          ]
-        };
+      suite('When I select to view a payment', function () {
+        var element;
+        setup(() => {
+          element = fixture('BasicTestFixture');
+          var grid = element.$.grid;
+          grid.dispatchEvent(new CustomEvent('select', { detail: 'the-payment-id' }));
+        });
 
-        var element = fixture('BasicTestFixture');
-        var elementHeader = element.querySelectorAll('td');
+        test('Then the details are shown for the selected payment', () => {
+          assert.equal(element.$.details.paymentId, 'the-payment-id');
+        });
       });
-
     });
   </script>
 

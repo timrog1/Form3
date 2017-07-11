@@ -33,7 +33,7 @@
             };
         }
         viewClick(e) {
-            this.dispatchEvent(new CustomEvent('select', e.model.item));
+            this.dispatchEvent(new CustomEvent('select', { detail: e.model.item.id }));
         }
     }
 
