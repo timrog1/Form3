@@ -38,8 +38,11 @@
           grid.dispatchEvent(new CustomEvent('select', { detail: 'the-payment-id' }));
         });
 
-        test('Then the details are shown for the selected payment', () => {
-          assert.equal(element.$.details.paymentId, 'the-payment-id');
+        test('Then the details are shown for the selected payment', done => {
+          flush(() => {
+            assert.equal(element.$.detail.dataSource, 'payments/the-payment-id');
+            done();
+          });
         });
       });
     });

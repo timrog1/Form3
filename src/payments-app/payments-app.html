@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="payments-grid.html">
+<link rel="import" href="payment-detail.html">
 
 <dom-module id="payments-app">
   <template>
@@ -10,7 +11,8 @@
     </style>
     <h2>Payments</h2>
 
-    <payments-grid id="grid" data-source="/stub-data.json"></payments-grid>
+    <payments-grid id="grid" on-select="selectPayment" data-source="payments"></payments-grid>
+    <payment-detail id="detail" data-source="payments/{{selectedPaymentId}}"></payments-grid>
   </template>
 
   <script>
@@ -22,11 +24,12 @@
       static get is() { return 'payments-app'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'payments-app'
-          }
+          selectedPaymentId: String
         };
+      }
+      _bool(x) { return !!x}
+      selectPayment(e, id){
+        this.set('selectedPaymentId', id)
       }
     }
 

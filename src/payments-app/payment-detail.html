@@ -1,0 +1,20 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="payment-detail">
+    <template>
+    </template>
+    <script>
+    class PaymentDetail extends Polymer.Element {
+        static get is() { return 'payment-detail'; }
+        static get properties() {
+            return {
+                paymentId: String,
+                paymentData: Object
+            };
+        }
+    }
+
+    window.customElements.define(PaymentDetail.is, PaymentDetail);
+</script>
+</dom-module>
