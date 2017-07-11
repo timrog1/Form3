@@ -1,53 +1,55 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>payments-app test</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../../web-component-tester/browser.js"></script>
+  <title>payments-app test</title>
 
-    <link rel="import" href="../../src/payments-app/payments-app.html">
-  </head>
-  <body>
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../web-component-tester/browser.js"></script>
 
-    <test-fixture id="BasicTestFixture">
-      <template>
-        <payments-app></payments-app>
-      </template>
-    </test-fixture>
+  <link rel="import" href="../../src/payments-app/payments-app.html">
+</head>
 
-    <test-fixture id="ChangedPropertyTestFixture">
-      <template>
-        <payments-app prop1="new-prop1"></payments-app>
-      </template>
-    </test-fixture>
+<body>
 
-    <script>
-      suite('payments-app', function() {
+  <test-fixture id="BasicTestFixture">
+    <template>
+      <payments-app></payments-app>
+    </template>
+  </test-fixture>
 
-        test('instantiating the element with default properties works', function() {
-          var element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'payments-app');
-          var elementShadowRoot = element.shadowRoot;
-          var elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello payments-app!');
-        });
+  <script>
+    suite('payments-app', function () {
 
-        test('setting a property on the element works', function() {
-          // Create a test fixture
-          var element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.prop1, 'new-prop1');
-          var elementShadowRoot = element.shadowRoot;
-          var elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
-        });
-
+      test('Includes a payments grid', () => {
+        var element = fixture('BasicTestFixture');
+        var grid = element.shadowRoot.querySelector('payments-grid');
+        assert.isNotNull(grid);
       });
-    </script>
+
+      test('Shows a list of payment references', function () {
+        var data = {
+          data: [
+            {
+              attributes: {
+                reference: "a payment reference",
+                amount: "100.21"
+              }
+            }
+          ]
+        };
+
+        var element = fixture('BasicTestFixture');
+        var elementHeader = element.querySelectorAll('td');
+      });
+
+    });
+  </script>
 
 
-  </body>
+</body>
+
 </html>

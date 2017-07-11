@@ -1,0 +1,24 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="payments-grid">
+  <template>
+
+  </template>
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PaymentsGrid extends Polymer.Element {
+      static get is() { return 'payments-grid'; }
+      static get properties() {
+        return {
+          dataSource: String,
+          paymentData: Object
+        };
+      }
+    }
+
+    window.customElements.define(PaymentsGrid.is, PaymentsGrid);
+  </script>
+</dom-module>

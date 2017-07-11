@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>payments-grid test</title>
+
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../../src/payments-app/payments-grid.html">
+</head>
+
+<body>
+
+  <test-fixture id="BasicTestFixture">
+    <template>
+      <payments-grid data-source="/some-url"></payments-app>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('payments-grid', function () {
+      var server;
+      var stubData = {
+          data: [
+            {
+              attributes: {
+                reference: "a payment reference",
+                amount: "100.21"
+              }
+            }
+          ]
+        };
+
+      setup(() => {
+        server = sinon.fakeServer.create();
+        server.respondWith('GET', '/some-url', [200, [], JSON.stringify(stubData) ]);
+      });
+
+      test('Shows references in table', () => {
+          var element = fixture('BasicTestFixture');
+          debugger;
+          var cells = element.shadowRoot.querySelectorAll('td');
+          var text = Array.from(cells).map(td => c.innerText);
+          assert.include(text, 'a payment reference');
+      });
+
+      teardown(function () {
+        server.restore();
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>
