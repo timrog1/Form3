@@ -19,44 +19,56 @@
     </test-fixture>
 
     <script>
-    suite('when I view the payments-grid', function () {
-        var server;
-        var responseHeaders = {
-            json: { 'Content-Type': 'application/json' }
-        };
-        var stubData = {
-            data: [
-                {
-                    attributes: {
-                        reference: "a payment reference",
-                        amount: "100.21"
+        suite('when I view the payments-grid', function () {
+            var server;
+            var responseHeaders = {
+                json: { 'Content-Type': 'application/json' }
+            };
+            var stubData = {
+                data: [
+                    {
+                        attributes: {
+                            reference: "a payment reference",
+                            amount: "100.21"
+                        }
                     }
-                }
-            ]
-        };
+                ]
+            };
 
-        setup(() => {
-            server = sinon.fakeServer.create();
-            server.respondImmediately = true;
-            server.respondWith('GET', '/some-url', [200, responseHeaders.json, JSON.stringify(stubData)]);
-        });
+            setup(() => {
+                server = sinon.fakeServer.create();
+                server.respondImmediately = true;
+                server.respondWith('GET', '/some-url', [200, responseHeaders.json, JSON.stringify(stubData)]);
+            });
 
-        test('then it shows references in a list', done => {
-            var element = fixture('BasicTestFixture');
-            
-            flush(() => {
-                var cells = Polymer.dom(element.root).querySelectorAll('li');
-                var text = Array.from(cells).map(td => td.innerText);
-                assert.include(text, 'a payment reference');
-                done();
+            function tableCellText(element) {
+                var cells = Polymer.dom(element.root).querySelectorAll('td');
+                return Array.from(cells).map(td => td.innerText);
+            }
+
+            test('then it shows payment references in the grid', done => {
+                var element = fixture('BasicTestFixture');
+
+                flush(() => {
+                    assert.include(tableCellText(element), 'a payment reference');
+                    done();
+                });
+            });
+
+            test('then it shows amounts and currencies references in the grid', done => {
+                var element = fixture('BasicTestFixture');
+
+                flush(() => {
+                    assert.include(tableCellText(element), 'GBP 100.21');
+                    done();
+                });
+            });
+
+            teardown(function () {
+                server.restore();
             });
         });
-
-        teardown(function () {
-            server.restore();
-        });
-    });
-</script>
+    </script>
 
 
 </body>
