@@ -11,8 +11,8 @@
     </style>
     <h2>Payments</h2>
 
-    <payments-grid id="grid" on-select="selectPayment" data-source="payments"></payments-grid>
-    <payment-detail id="detail" data-source="payments/{{selectedPaymentId}}"></payments-grid>
+    <payments-grid id="grid" on-select="selectPayment" data-source="http://localhost:8888/payments"></payments-grid>
+    <payment-detail id="detail" data-source="http://localhost:8888/payments/{{selectedPaymentId}}"></payments-grid>
   </template>
 
   <script>
