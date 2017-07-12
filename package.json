@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "concurrently \"polymer serve\" \"node payments-repo/stub\" \"opn http://localhost:8081/components/payments\""
+    "start": "concurrently \"polymer serve\" \"node payments-repo/stub\" \"opn http://localhost:8081/components/payments\"",
+    "test": "polymer test -l chrome"
   },
   "devDependencies": {
     "express": "^4.15.3",
