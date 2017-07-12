@@ -2,32 +2,30 @@
 
 Payments viewer demo
 
-## Install the Polymer-CLI
+A demonstration implemented using Polyer Web Components, and a stub data server hosted in Node.
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
-
-## Viewing Your Application
+## Installation
 
 ```
-$ polymer serve
+$ npm install
+$ bower install
 ```
 
-## Building Your Application
+## Running in browser
 
 ```
-$ polymer build
+$ npm start
 ```
 
-This will create builds of your application in the `build/` directory, optimized to be served in production. You can then serve the built versions by giving `polymer serve` a folder to serve from:
+## Running tests
 
 ```
-$ polymer serve build/default
+$ npm test
 ```
 
-## Running Tests
-
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+## TODO list
+1. Test in other browsers (only tested in Chrome so far)
+2. Create some more representative stub data (all the records supplied were the same).
+3. Create contract tests (using e.g. Pact) to ensure contracts maintained between client and server.
+4. Make the endpoint of the server configurable.
+5. Make it prettier.
