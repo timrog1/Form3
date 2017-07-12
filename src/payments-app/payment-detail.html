@@ -3,7 +3,12 @@
 
 <dom-module id="payment-detail">
     <template>
-        xxx
+        <iron-ajax auto url="{{dataSource}}" last-response="{{paymentData}}"></iron-ajax>
+        <h2>Payment details</h2>
+        <dl>
+            <dh>Beneficiary name:</dh>
+            <dd>[[paymentData.attributes.beneficiary_party.name]]</dd>
+        </dl>
     </template>
     <script>
         class PaymentDetail extends Polymer.Element {

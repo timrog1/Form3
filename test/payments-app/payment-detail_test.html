@@ -14,7 +14,7 @@
 
     <test-fixture id="BasicTestFixture">
         <template>
-            <payment-detail data-source="payments/123"></payments-detail>
+            <payment-detail data-source="/payments/123"></payments-detail>
         </template>
     </test-fixture>
 
@@ -46,14 +46,17 @@
             setup(() => {
                 server = sinon.fakeServer.create();
                 server.respondImmediately = true;
-                server.respondWith('GET', 'payments/123', [200, responseHeaders.json, JSON.stringify(paymentDetail)]);
+                server.respondWith('GET', '/payments/123', [200, responseHeaders.json, JSON.stringify(paymentDetail)]);
             });
 
-            test('Then the beneficiary\'s name is shown', () => {
+            test('Then the beneficiary\'s name is shown', done => {
                 var element = fixture('BasicTestFixture');
-                var items = Polymer.dom(element.root).querySelectorAll('dd');
-                var text = Array.from(items).map(dd => dd.innerText);
-                assert.include(text, 'Wilfred Jeremiah Owens');
+                flush(() => {
+                    var items = Polymer.dom(element.root).querySelectorAll('dd');
+                    var text = Array.from(items).map(dd => dd.innerText);
+                    assert.include(text, 'Wilfred Jeremiah Owens');
+                    done();
+                });
             });
 
             teardown(function () {
