@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "concurrently \"polymer serve\" \"node payments-repo/stub\" \"opn http://localhost:8081/components/payments\""
+    "start": "concurrently \"polymer serve --port 8081\" \"node payments-repo/stub\" \"opn http://localhost:8081/components/payments\""
   },
   "devDependencies": {
     "express": "^4.15.3",
