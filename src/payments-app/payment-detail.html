@@ -6,8 +6,24 @@
         <iron-ajax auto url="{{dataSource}}" last-response="{{paymentData}}"></iron-ajax>
         <h2>Payment details</h2>
         <dl>
+            <dh>Date:</dh>
+            <dd>[[paymentData.attributes.processing_date]]</dd>
+        </dl>
+        <dl>
             <dh>Beneficiary name:</dh>
             <dd>[[paymentData.attributes.beneficiary_party.name]]</dd>
+        </dl>
+        <dl>
+            <dh>Debtor name:</dh>
+            <dd>[[paymentData.attributes.debtor_party.name]]</dd>
+        </dl>
+        <dl>
+            <dh>Amount:</dh>
+            <dd>[[paymentData.attributes.amount]]</dd>
+        </dl>
+        <dl>
+            <dh>Currency:</dh>
+            <dd>[[paymentData.attributes.currency]]</dd>
         </dl>
     </template>
     <script>
