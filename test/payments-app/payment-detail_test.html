@@ -14,7 +14,8 @@
 
     <test-fixture id="BasicTestFixture">
         <template>
-            <payment-detail data-source="/payments/123"></payments-detail>
+            <payment-detail data-source="/payments/123">
+                </payments-detail>
         </template>
     </test-fixture>
 
@@ -49,14 +50,34 @@
                 server.respondWith('GET', '/payments/123', [200, responseHeaders.json, JSON.stringify(paymentDetail)]);
             });
 
-            test('Then the beneficiary\'s name is shown', done => {
+            function detailsInclude(text, done) {
                 var element = fixture('BasicTestFixture');
                 flush(() => {
                     var items = Polymer.dom(element.root).querySelectorAll('dd');
-                    var text = Array.from(items).map(dd => dd.innerText);
-                    assert.include(text, 'Wilfred Jeremiah Owens');
+                    var textFields = Array.from(items).map(dd => dd.innerText);
+                    assert.include(textFields, text);
                     done();
                 });
+            }
+
+            test('Then the beneficiary\'s name is shown', done => {
+                detailsInclude("Wilfred Jeremiah Owens", done);
+            });
+
+            test('Then the debtor\'s name is shown', done => {
+                detailsInclude("Emelia Jane Brown", done);
+            });
+
+            test('Then the processing date is shown', done => {
+                detailsInclude("2017-01-18", done);
+            });
+
+            test('Then the amount is shown', done => {
+                detailsInclude("2017-01-18", done);
+            });
+
+            test('Then the currency is shown', done => {
+                detailsInclude("GBP", done);
             });
 
             teardown(function () {
