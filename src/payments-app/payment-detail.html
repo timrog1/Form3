@@ -3,18 +3,19 @@
 
 <dom-module id="payment-detail">
     <template>
+        xxx
     </template>
     <script>
-    class PaymentDetail extends Polymer.Element {
-        static get is() { return 'payment-detail'; }
-        static get properties() {
-            return {
-                paymentId: String,
-                paymentData: Object
-            };
+        class PaymentDetail extends Polymer.Element {
+            static get is() { return 'payment-detail'; }
+            static get properties() {
+                return {
+                    dataSource: String,
+                    paymentData: Object
+                };
+            }
         }
-    }
 
-    window.customElements.define(PaymentDetail.is, PaymentDetail);
-</script>
+        window.customElements.define(PaymentDetail.is, PaymentDetail);
+    </script>
 </dom-module>

@@ -2,26 +2,65 @@
 <html lang="en">
 
 <head>
-  <title>payments-detail test</title>
+    <title>payments-detail test</title>
 
-  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
-  <script src="../../../web-component-tester/browser.js"></script>
+    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../web-component-tester/browser.js"></script>
 
-  <link rel="import" href="../../src/payments-app/payments-detail.html">
+    <link rel="import" href="../../src/payments-app/payment-detail.html">
 </head>
 
 <body>
 
-  <test-fixture id="BasicTestFixture">
-    <template>
-      <payment-detail></payments-detail>
-    </template>
-  </test-fixture>
+    <test-fixture id="BasicTestFixture">
+        <template>
+            <payment-detail data-source="payments/123"></payments-detail>
+        </template>
+    </test-fixture>
 
-  <script>
-    suite('payments-detail', function () {
-    });
-  </script>
+    <script>
+        suite('When I view the detail of a payment', function () {
+            var server;
+            var responseHeaders = {
+                json: { 'Content-Type': 'application/json' }
+            };
+            var paymentDetail = {
+                "type": "Payment",
+                "id": "123",
+                "version": 0,
+                "attributes": {
+                    "amount": "100.21",
+                    "beneficiary_party": {
+                        "name": "Wilfred Jeremiah Owens"
+                    },
+                    "currency": "GBP",
+                    "debtor_party": {
+                        "name": "Emelia Jane Brown"
+                    },
+                    "end_to_end_reference": "Wil piano Jan",
+                    "processing_date": "2017-01-18",
+                    "reference": "Payment for Em's piano lessons"
+                }
+            };
+
+            setup(() => {
+                server = sinon.fakeServer.create();
+                server.respondImmediately = true;
+                server.respondWith('GET', 'payments/123', [200, responseHeaders.json, JSON.stringify(paymentDetail)]);
+            });
+
+            test('Then the beneficiary\'s name is shown', () => {
+                var element = fixture('BasicTestFixture');
+                var items = Polymer.dom(element.root).querySelectorAll('dd');
+                var text = Array.from(items).map(dd => dd.innerText);
+                assert.include(text, 'Wilfred Jeremiah Owens');
+            });
+
+            teardown(function () {
+                server.restore();
+            });
+        });
+    </script>
 
 
 </body>
