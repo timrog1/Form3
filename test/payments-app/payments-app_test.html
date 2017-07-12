@@ -17,17 +17,22 @@
 
   <test-fixture id="BasicTestFixture">
     <template>
-      <payments-app></payments-app>
+      <payments-app data-root-url="payments"></payments-app>
     </template>
   </test-fixture>
 
   <script>
-    suite('payments-app', function () {
+    suite('When I view the payment app', function () {
 
-      test('Includes a payments grid', () => {
+      test('Then I can see the payments grid', () => {
         var element = fixture('BasicTestFixture');
         var grid = element.shadowRoot.querySelector('payments-grid');
         assert.isNotNull(grid);
+      });
+
+      test('Then payment details are initially hidden', () => {
+          element = fixture('BasicTestFixture');
+          assert.isTrue(element.$.detail.hidden);
       });
 
       suite('When I select to view a payment', function () {
@@ -43,10 +48,6 @@
             assert.equal(element.$.detail.dataSource, 'payments/the-payment-id');
             done();
           });
-        });
-
-        teardown(function () {
-          server.restore();
         });
       });
     });

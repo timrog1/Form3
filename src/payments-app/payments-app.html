@@ -7,32 +7,38 @@
     <style>
       :host {
         display: block;
+        font-family: sans-serif;
       }
+      #container { display: flex; }
+      #container>* { flex: 1; }
     </style>
     <h2>Payments</h2>
 
-    <payments-grid id="grid" on-select="selectPayment" data-source="http://localhost:8888/payments"></payments-grid>
-    <payment-detail id="detail" data-source="http://localhost:8888/payments/{{selectedPaymentId}}"></payments-grid>
-  </template>
+    <div id="container">
+      <payments-grid id="grid" on-select="selectPayment" data-source="{{dataRootUrl}}"></payments-grid>
+      <payment-detail id="detail" hidden$="{{!selectedPaymentId}}" data-source="{{dataRootUrl}}/{{selectedPaymentId}}">
+        </payments-grid>
+    </div>
+</template>
 
-  <script>
-    /**
-     * @customElement
-     * @polymer
-     */
-    class PaymentsApp extends Polymer.Element {
-      static get is() { return 'payments-app'; }
-      static get properties() {
-        return {
-          selectedPaymentId: String
-        };
-      }
-      _bool(x) { return !!x}
-      selectPayment(e, id){
-        this.set('selectedPaymentId', id)
-      }
+<script>
+  /**
+   * @customElement
+   * @polymer
+   */
+  class PaymentsApp extends Polymer.Element {
+    static get is() { return 'payments-app'; }
+    static get properties() {
+      return {
+        selectedPaymentId: { type: String, value: null },
+        dataRootUrl: { type: String, value: "http://localhost:8888/payments" }
+      };
     }
+    selectPayment(e, id) {
+      this.set('selectedPaymentId', id)
+    }
+  }
 
-    window.customElements.define(PaymentsApp.is, PaymentsApp);
-  </script>
+  window.customElements.define(PaymentsApp.is, PaymentsApp);
+</script>
 </dom-module>

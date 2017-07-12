@@ -71,7 +71,7 @@
             "version": 0,
             "organisation_id": "743d5b63-8e6f-432e-a8fa-c5d8d2ee5fcb",
             "attributes": {
-                "amount": "100.21",
+                "amount": "120.21",
                 "beneficiary_party": {
                     "account_name": "W Owens",
                     "account_number": "31926819",
@@ -120,7 +120,7 @@
                 "payment_scheme": "FPS",
                 "payment_type": "Credit",
                 "processing_date": "2017-01-18",
-                "reference": "Payment for Em's piano lessons",
+                "reference": "Payment for something else",
                 "scheme_payment_sub_type": "InternetBanking",
                 "scheme_payment_type": "ImmediatePayment",
                 "sponsor_party": {
@@ -136,7 +136,7 @@
             "version": 0,
             "organisation_id": "743d5b63-8e6f-432e-a8fa-c5d8d2ee5fcb",
             "attributes": {
-                "amount": "100.21",
+                "amount": "130.21",
                 "beneficiary_party": {
                     "account_name": "W Owens",
                     "account_number": "31926819",
